@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+// import api from "../services/api";
 import logo from "../../assets/logo1.png";
 import { FaGoogle } from "react-icons/fa";
 import { auth } from "../services/firebase";
