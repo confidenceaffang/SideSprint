@@ -15,6 +15,9 @@ import PublicRoute from "./components/PublicRoute";
 import PostJob from "./components/Pages/PostJob";
 import AskForHelp from "./components/Pages/AskForHelp";
 import PostedJobs from "./components/Pages/PostedJobs";
+import JobDetail from "./components/Pages/JobDetail";
+import ProvideHelp from "./components/Pages/ProvideHelp";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -24,6 +27,7 @@ const App = () => {
         <Route path="/dashboard/postjobs" element={<PostJob />} />
         <Route path="/dashboard/postedjobs" element={<PostedJobs />} />
         <Route path="/dashboard/askforhelp" element={<AskForHelp />} />
+        <Route path="/dashboard/providehelp" element={<ProvideHelp />} />
         <Route path="/dashboard/profile" element={<Profile />} />
         <Route path="/dashboard/inbox" element={<Inbox />} />
         <Route
@@ -42,17 +46,11 @@ const App = () => {
             </PublicRoute>
           }
         />
-        <Route
-          path="/onboarding"
-          element={
-            <PrivateRoute>
-              <OnboardingForm />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/onboarding" element={<OnboardingForm />} />
         <Route path="/about" element={<About />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/terms&conditions" element={<TermsAndConditions />} />
+        <Route path="/job/:id" element={<JobDetail />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/api";
+import { useNavigate } from 'react-router-dom';
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -96,7 +97,8 @@ const Jobs = () => {
         {filteredJobs.map((job) => (
           <div
             key={job._id}
-            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300"
+            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300 cursor-pointer"
+            onClick={() => navigate(`/job/${job._id}`)}
           >
             <h2 className="text-xl font-semibold text-gray-800 mb-2">{job.job}</h2>
             <p className="text-gray-600 mb-4">{job.description}</p>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 
-const AskForHelp = () => {
+const ProvideHelp = () => {
   const [employees, setEmployees] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [filters, setFilters] = useState({
@@ -246,4 +246,4 @@ const AskForHelp = () => {
   );
 };
 
-export default AskForHelp;
+export default ProvideHelp;
