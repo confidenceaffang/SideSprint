@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import logo from "../../assets/logo1.png";
 import { FaGoogle } from "react-icons/fa";
+import { auth } from "../services/firebase";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,11 +21,61 @@ const Login = () => {
     setError("");
 
     try {
-      const res = await api.post("/auth/login", { email, password });
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      const res = await api.post("/auth/login", {
+        email,
+        uid: user.uid,
+      });
+
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     } catch (err) {
-      setError(`Login failed. Please check your email and password. ${err}`);
+      let errorMessage = "Login failed. Please check your credentials.";
+      switch (err.code) {
+        case "auth/user-not-found":
+          errorMessage = "No account found with this email.";
+          break;
+        case "auth/wrong-password":
+          errorMessage = "Invalid password.";
+          break;
+        case "auth/invalid-email":
+          errorMessage = "Invalid email address.";
+          break;
+        default:
+          errorMessage = err.message;
+      }
+      setError(errorMessage);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const res = await api.post("/auth/login", {
+        email: user.email,
+        uid: user.uid,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      navigate("/dashboard");
+    } catch (err) {
+      let errorMessage = "Google sign-in failed. Please try again.";
+      if (err.code === "auth/popup-closed-by-user") {
+        errorMessage = "Google sign-in popup closed.";
+      } else {
+        errorMessage = err.message;
+      }
+      setError(errorMessage);
     }
   };
 
@@ -39,7 +95,7 @@ const Login = () => {
               <div>
                 <div className="mt-1">
                   <div>
-                    <div className="hover:cursor-pointer inline-flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
+                    <div className="hover:cursor-pointer inline-flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50" onClick={handleGoogleSignIn}>
                       <FaGoogle className="h-5 w-5" />
                       <span>Sign in with Google</span>
                     </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { GrUpdate } from "react-icons/gr";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo1.png";
-
+import PostedJobs from "./PostedJobs";
 const jobs = [
   ...Array.from({ length: 20 }, (_, i) => ({
     title: `Job ${i + 1}`,
@@ -57,7 +57,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="container p-4">
+    <div className="container  p-4">
       <div className="flex w-screen">
         <div className="hidden md:flex md:w-64 md:flex-col">
           <div className="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-r">
@@ -127,7 +127,7 @@ const Dashboard = () => {
 
                 <nav className="flex-1 space-y-2">
                   <Link
-                    to="#"
+                    to="/dashboard/inbox"
                     className="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 hover:text-white rounded-lg hover:bg-indigo-600 group"
                   >
                     <svg
@@ -149,7 +149,7 @@ const Dashboard = () => {
 
                   {role === "employer" && (
                     <Link
-                      to="#"
+                      to="/dashboard/postedjobs"
                       className="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 hover:text-white rounded-lg hover:bg-indigo-600 group"
                     >
                       <svg
@@ -171,7 +171,7 @@ const Dashboard = () => {
                   )}
                   {role === "employer" && (
                     <Link
-                      to="#"
+                      to="/dashboard/postjobs"
                       className="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 hover:text-white rounded-lg hover:bg-indigo-600 group"
                     >
                       <svg
@@ -189,6 +189,28 @@ const Dashboard = () => {
                         />
                       </svg>
                       Post Jobs
+                    </Link>
+                  )}
+                  {role === "employer" && (
+                    <Link
+                      to="/dashboard/askforhelp"
+                      className="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 hover:text-white rounded-lg hover:bg-indigo-600 group"
+                    >
+                      <svg
+                        className="flex-shrink-0 w-5 h-5 mr-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                        />
+                      </svg>
+                      Ask For Help
                     </Link>
                   )}
 
@@ -371,15 +393,17 @@ const JobCard = ({
   description,
 }) => {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md border">
-      <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="text-gray-600">{company}</p>
-      <p className="text-gray-500">
+    <div className="bg-white p-4 rounded-lg border transform transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-md shadow-gray-300/50">
+      <h3 className="text-xl font-semibold text-gray-800">{title}</h3>
+      <p className="text-gray-600 font-medium">{company}</p>
+      <p className="text-gray-500 text-sm">
         {location} | {jobType}
       </p>
-      <p className="text-gray-400">{salary}</p>
-      <p className="mt-2 text-gray-700">{description}</p>
-      <button className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md">
+      <p className="text-indigo-600 font-medium">{salary}</p>
+      <p className="mt-2 text-gray-700 line-clamp-2 hover:line-clamp-none transition-all duration-300">
+        {description}
+      </p>
+      <button className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors duration-300 w-full">
         Apply
       </button>
     </div>
