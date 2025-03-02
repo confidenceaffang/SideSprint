@@ -2,6 +2,7 @@ import logo from "../assets/logo1.png";
 import { BsPerson } from "react-icons/bs";
 import React, { useState } from "react";
 import jobs from "../assets/jobs.jpg";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [expanded, setExpanded] = useState(false);
@@ -67,24 +68,23 @@ const Hero = () => {
             </div>
 
             <nav className="hidden ml-10 mr-auto space-x-10 lg:ml-20 lg:space-x-12 md:flex md:items-center md:justify-start">
-              <a
-                href="#"
-                className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white"
-              >
-                Jobs
-              </a>
-              <a
-                href="#"
-                className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white"
-              >
-                About
-              </a>
+              <Link to="/">
+                <div className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white">
+                  Home
+                </div>
+              </Link>
+
+              <Link to="/jobs">
+                <div className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white">
+                  Jobs
+                </div>
+              </Link>
+
+              <Link to="/about">
+                <div className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white">
+                  About
+                </div>
+              </Link>
             </nav>
 
             <div className="z-50 relative hidden md:items-center md:justify-center md:inline-flex group">
@@ -100,20 +100,18 @@ const Hero = () => {
               <div className="absolute top-full mt-2 w-48 bg-black border border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <ul className="py-2">
                   <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
-                    >
-                      Register
-                    </a>
+                    <Link to="/register">
+                      <div className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">
+                        Register
+                      </div>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
-                    >
-                      Login
-                    </a>
+                    <Link to="/login">
+                      <div className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">
+                        Login
+                      </div>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -551,7 +549,80 @@ const Hero = () => {
           </div>
         </div>
       </section>
-      <section>Jobs</section>
+      <section className="py-10 bg-black text-white sm:py-16 lg:py-24">
+        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl font-bold leading-tight text-gray-300 sm:text-4xl lg:text-5xl">
+              How does it work?
+            </h2>
+            <p className="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">
+              Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+              amet sint. Velit officia consequat duis.
+            </p>
+          </div>
+
+          <div className="relative mt-12 lg:mt-20">
+            <div className="absolute inset-x-0 hidden xl:px-44 top-2 md:block md:px-20 lg:px-28">
+              <img
+                className="w-full"
+                src="https://cdn.rareblocks.xyz/collection/celebration/images/steps/2/curved-dotted-line.svg"
+                alt=""
+              />
+            </div>
+
+            <div className="relative grid grid-cols-1 text-center gap-y-12 md:grid-cols-3 gap-x-12">
+              <div>
+                <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                  <span className="text-xl font-semibold text-gray-700">
+                    {" "}
+                    1{" "}
+                  </span>
+                </div>
+                <h3 className="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                  Create a free account
+                </h3>
+                <p className="mt-4 text-base text-gray-600">
+                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+                  amet sint. Velit officia consequat duis enim velit mollit.
+                </p>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                  <span className="text-xl font-semibold text-gray-700">
+                    {" "}
+                    2{" "}
+                  </span>
+                </div>
+                <h3 className="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                  Build your website
+                </h3>
+                <p className="mt-4 text-base text-gray-600">
+                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+                  amet sint. Velit officia consequat duis enim velit mollit.
+                </p>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
+                  <span className="text-xl font-semibold text-gray-700">
+                    {" "}
+                    3{" "}
+                  </span>
+                </div>
+                <h3 className="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">
+                  Release & Launch
+                </h3>
+                <p className="mt-4 text-base text-gray-600">
+                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+                  amet sint. Velit officia consequat duis enim velit mollit.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section></section>
     </div>
   );
 };
