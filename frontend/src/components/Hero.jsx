@@ -2,6 +2,7 @@ import logo from "../assets/logo1.png";
 import { BsPerson } from "react-icons/bs";
 import React, { useState } from "react";
 import jobs from "../assets/jobs.jpg";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [expanded, setExpanded] = useState(false);
@@ -67,24 +68,23 @@ const Hero = () => {
             </div>
 
             <nav className="hidden ml-10 mr-auto space-x-10 lg:ml-20 lg:space-x-12 md:flex md:items-center md:justify-start">
-              <a
-                href="#"
-                className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white"
-              >
-                Home
-              </a>
-              <a
-                href="#"
-                className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white"
-              >
-                Jobs
-              </a>
-              <a
-                href="#"
-                className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white"
-              >
-                About
-              </a>
+              <Link to="/">
+                <div className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white">
+                  Home
+                </div>
+              </Link>
+
+              <Link to="/jobs">
+                <div className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white">
+                  Jobs
+                </div>
+              </Link>
+
+              <Link to="/about">
+                <div className="text-base font-normal text-gray-400 transition-all duration-200 hover:text-white">
+                  About
+                </div>
+              </Link>
             </nav>
 
             <div className="z-50 relative hidden md:items-center md:justify-center md:inline-flex group">
@@ -100,20 +100,18 @@ const Hero = () => {
               <div className="absolute top-full mt-2 w-48 bg-black border border-gray-700 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <ul className="py-2">
                   <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
-                    >
-                      Register
-                    </a>
+                    <Link to="/register">
+                      <div className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">
+                        Register
+                      </div>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white"
-                    >
-                      Login
-                    </a>
+                    <Link to="/login">
+                      <div className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white">
+                        Login
+                      </div>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -624,7 +622,7 @@ const Hero = () => {
           </div>
         </div>
       </section>
-      <section>Jobs</section>
+      <section></section>
     </div>
   );
 };

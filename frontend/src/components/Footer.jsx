@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/logo1.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -98,25 +99,21 @@ const Footer = () => {
 
             <ul className="mt-6 space-y-4">
               <li>
-                <a
-                  href="#"
-                  title=""
-                  className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                >
-                  {" "}
-                  About{" "}
-                </a>
+                <Link to="/about">
+                  <div className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                    {" "}
+                    About{" "}
+                  </div>
+                </Link>
               </li>
 
               <li>
-                <a
-                  href="#"
-                  title=""
-                  className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                >
-                  {" "}
-                  Jobs{" "}
-                </a>
+                <Link to="/jobs">
+                  <div className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                    {" "}
+                    Jobs{" "}
+                  </div>
+                </Link>
               </li>
             </ul>
           </div>
@@ -128,36 +125,21 @@ const Footer = () => {
 
             <ul className="mt-6 space-y-4">
               <li>
-                <a
-                  href="#"
-                  title=""
-                  className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                >
-                  {" "}
-                  Support{" "}
-                </a>
+                <Link to="/terms&conditions">
+                  <div className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                    {" "}
+                    Terms & Conditions{" "}
+                  </div>
+                </Link>
               </li>
 
               <li>
-                <a
-                  href="#"
-                  title=""
-                  className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                >
-                  {" "}
-                  Terms & Conditions{" "}
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="#"
-                  title=""
-                  className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                >
-                  {" "}
-                  Privacy Policy{" "}
-                </a>
+                <Link to="/terms&conditions">
+                  <div className="flex text-base  transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                    {" "}
+                    Privacy Policy{" "}
+                  </div>
+                </Link>
               </li>
             </ul>
           </div>
