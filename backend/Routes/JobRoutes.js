@@ -3,6 +3,17 @@ import postJob from "../mongoDB/models/post.js";
 const router = express.Router();
 
 
+// GET ALL POSTS
+router.route("/").get(async (req, res) => {
+  try {
+    const allJobs = await postJob.find({});
+    res.status(200).json({ success: true, data: allJobs });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error });
+  }
+});
+
+
 // Create a job
 router.route("/").post(async (req, res) => {
   try {
