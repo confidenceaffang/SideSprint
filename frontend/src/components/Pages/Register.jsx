@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import logo from "../../assets/logo1.png";
 import { FaGoogle } from "react-icons/fa";
+import { auth } from "../services/firebase";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -22,17 +28,64 @@ const Register = () => {
     }
 
     try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
       const res = await api.post("/auth/register", {
         name,
         email,
-        password,
+        uid: user.uid,
       });
+
       localStorage.setItem("token", res.data.token);
       navigate("/onboarding");
     } catch (err) {
-      setError(
-        `Sign-up failed. Please check your details and try again. ${err}`
-      );
+      let errorMessage =
+        "Sign-up failed. Please check your details and try again.";
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          errorMessage = "Email already in use.";
+          break;
+        case "auth/invalid-email":
+          errorMessage = "Invalid email address.";
+          break;
+        case "auth/weak-password":
+          errorMessage = "Password should be at least 6 characters.";
+          break;
+        default:
+          errorMessage = err.message;
+      }
+      setError(errorMessage);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const res = await api.post("/auth/register", {
+        name: user.displayName,
+        email: user.email,
+        uid: user.uid,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      navigate("/onboarding");
+    } catch (err) {
+      let errorMessage = "Google sign-up failed. Please try again.";
+      if (err.code === "auth/popup-closed-by-user") {
+        errorMessage = "Google sign-up popup closed.";
+      } else {
+        errorMessage = err.message;
+      }
+      setError(errorMessage);
     }
   };
 
@@ -52,7 +105,10 @@ const Register = () => {
               <div>
                 <div className="mt-1">
                   <div>
-                    <div className="hover:cursor-pointer inline-flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
+                    <div
+                      className="hover:cursor-pointer inline-flex w-full justify-center items-center gap-2 rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
+                      onClick={handleGoogleSignUp}
+                    >
                       <FaGoogle className="h-5 w-5" />
                       <span>Sign up with Google</span>
                     </div>
