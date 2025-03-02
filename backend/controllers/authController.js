@@ -1,5 +1,5 @@
 import User from '../mongoDB/models/User.js';
-import { createToken } from '../services/authService.js';
+import createToken from '../services/authService.js'; // Default import
 import { OAuth2Client } from 'google-auth-library';
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);

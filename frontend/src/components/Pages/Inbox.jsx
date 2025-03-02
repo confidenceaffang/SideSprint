@@ -3,11 +3,7 @@ import { FaSpinner, FaInbox, FaPaperPlane } from "react-icons/fa";
 import io from "socket.io-client";
 import api from "../services/api";
 
-<<<<<<< HEAD
-const socket = io("http://localhost:5000");
-=======
 const socket = io("http://localhost:3000"); // Connect to the backend
->>>>>>> d7af7d4e5e9c0e0ba7e19eff8e7adfcf1671d2d4
 
 const Inbox = () => {
   const [messages, setMessages] = useState([]);
